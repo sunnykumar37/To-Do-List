@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do Lists</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+<div class="page-wrapper">
+<div class="container">
+    <h1>📋 My To Do Lists</h1>
+
+    <div class="header-actions">
+        <a href="/add-list/" class="btn btn-primary">➕ Add New List</a>
+        <a href="/add-task/" class="btn btn-secondary">✏️ Add New Task</a>
+    </div>
+
+    {% if lists %}
+    <div class="list-grid">
+        {% for list in lists %}
+        <div class="card">
+            <h3>{{ list.name }}</h3>
+            <div class="card-actions">
+                <a href="/list/{{ list.id }}/" class="btn btn-primary">👁️ View</a>
+                <a href="/list/{{ list.id }}/delete/" class="btn btn-danger">🗑️ Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>📭 No lists found</p>
+        <a href="/add-list/" class="btn btn-primary">Create your first list</a>
+    </div>
+    {% endif %}
+
+</div>
+</div>
+
+</body>
+</html>

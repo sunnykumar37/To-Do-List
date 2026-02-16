@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ list.name }} - Tasks</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="page-wrapper">
+<div class="container">
+    <h1>📋 {{ list.name }}</h1>
+
+    <div class="header-actions">
+        <a href="/" class="btn btn-secondary">← Back to Lists</a>
+        <a href="/add-task/?list={{ list.id }}" class="btn btn-primary">➕ Add Task</a>
+    </div>
+
+    <h2 style="text-align: center; color: #333; margin-top: 40px; margin-bottom: 30px;">📝 Tasks</h2>
+
+    {% if list.tasks.all %}
+    <div class="tasks-container">
+        {% for task in list.tasks.all %}
+        <div class="task-card">
+            <div class="task-title">{{ task.title }}</div>
+            <div class="task-status">
+                {% if task.is_completed %}
+                    <span class="badge badge-completed">✅ Completed</span>
+                {% else %}
+                    <span class="badge badge-pending">⏳ Pending</span>
+                {% endif %}
+            </div>
+            <div class="task-actions">
+                <a href="/task/{{ task.id }}/delete/" class="btn btn-danger btn-sm">🗑️ Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>📭 No tasks in this list yet</p>
+        <a href="/add-task/?list={{ list.id }}" class="btn btn-primary">Create your first task</a>
+    </div>
+    {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>
