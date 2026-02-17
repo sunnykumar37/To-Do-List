@@ -1,3 +1,5 @@
 djnago
 numpy
 pandas
+
+scikit-learn
