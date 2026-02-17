@@ -1,0 +1,3 @@
+djnago
+numpy
+pandas
